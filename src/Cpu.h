@@ -59,8 +59,22 @@ public:
 	void Clock();
 	void Clock(int times);
 
+private:
 	void LdaIm();
 	void LdaZp();
+	void LdaZpX();
+	void LdaAbs();
+	void LdaAbsX();
+	void LdaAbsY();
+	void LdaIndX();
+	void LdaIndY();
+
+	void LdxIm();
+	void LdxZp();
+	void LdxZpY();
+	void LdxAbs();
+	void LdxAbsY();
+
 	void Nop();
 
 private:

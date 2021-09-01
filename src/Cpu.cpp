@@ -1,5 +1,8 @@
 #include "Cpu.h"
 
+#include "Cpu_lda.h"
+#include "Cpu_ldx.h"
+
 Cpu::Cpu(Bus* bus) : mBus(bus) {}
 
 Cpu::~Cpu() {}
@@ -22,6 +25,41 @@ void Cpu::Clock()
 	case lda_zp:
 		LdaZp();
 		break;
+	case lda_zpx:
+		LdaZpX();
+		break;
+	case lda_abs:
+		LdaAbs();
+		break;
+	case lda_absx:
+		LdaAbsX();
+		break;
+	case lda_absy:
+		LdaAbsY();
+		break;
+	case lda_indx:
+		LdaIndX();
+		break;
+	case lda_indy:
+		LdaIndY();
+		break;
+
+	case ldx_im:
+		LdxIm();
+		break;
+	case ldx_zp:
+		LdxZp();
+		break;
+	case ldx_zpy:
+		LdxZpY();
+		break;
+	case ldx_abs:
+		LdxAbs();
+		break;
+	case ldx_absy:
+		LdxAbsY();
+		break;
+
 	case nop:
 		Nop();
 		break;
