@@ -12,8 +12,7 @@ void Cpu::Reset()
 
 void Cpu::Clock()
 {
-	uint8_t instruction = mBus->ReadByte(pc++);
-	mCycles--;
+	uint8_t instruction = ReadByte(pc++);
 
 	switch (instruction)
 	{
@@ -39,25 +38,40 @@ void Cpu::Clock(int times)
 	while(mCycles > 0) Clock();
 }
 
-void Cpu::LdaIm()
-{
-	a = mBus->ReadByte(pc++);
-	mCycles--;
-	z = a == 0;
-	n = a & (1 << 7);
-}
-
-void Cpu::LdaZp()
-{
-	uint8_t zeroPageAddress = mBus->ReadByte(pc++);
-	mCycles--;
-	a = mBus->ReadByte(zeroPageAddress);
-	mCycles--;
-	z = a == 0;
-	n = a & (1 << 7);
-}
-
 void Cpu::Nop()
 {
+	auto c = ClocksCounter(&mCycles);
 	mCycles--;
+}
+
+void Cpu::SetRegister(uint8_t& r, uint8_t value)
+{
+	r = value;
+	z = r == 0;
+	n = r & (1 << 7);
+}
+
+bool Cpu::AddressPageWillBeCrossed(uint8_t lo, uint8_t hi, uint8_t offset) const
+{
+	hi = lo;
+	lo += offset;
+	return lo < hi;
+}
+
+uint8_t Cpu::ReadByte(uint16_t address)
+{
+	mCycles--;
+	return mBus->ReadByte(address);
+}
+
+uint16_t Cpu::ReadWord(uint16_t address)
+{
+	mCycles -= 2;
+	return mBus->ReadWord(address);
+}
+
+uint16_t Cpu::ReadWord(uint16_t address, uint8_t* outLo, uint8_t* outHi)
+{
+	mCycles -= 2;
+	return mBus->ReadWord(address, outLo, outHi);
 }

@@ -40,6 +40,15 @@ uint16_t Bus::ReadWord(uint16_t address) const
 	return (hi << 8) | lo;
 }
 
+uint16_t Bus::ReadWord(uint16_t address, uint8_t* outLo, uint8_t* outHi) const
+{
+	uint8_t lo = ReadByte(address);
+	uint8_t hi = ReadByte(address + 1);
+	*outLo = lo;
+	*outHi = hi;
+	return (hi << 8) | lo;
+}
+
 void Bus::WriteByte(uint16_t address, uint8_t data) const
 {
 	Device* device = GetDevice(address);

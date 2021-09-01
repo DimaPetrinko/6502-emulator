@@ -4,6 +4,31 @@
 #include "CpuConstants.h"
 #include "Bus.h"
 
+class ClocksCounter
+{
+private:
+	int mStartClocks;
+	int mEndClocks;
+	int mClocksElapsed;
+	int* mCurrentClocks;
+
+public:
+	ClocksCounter(int* clocks) :
+		mStartClocks(*clocks),
+		mEndClocks(0),
+		mClocksElapsed(0),
+		mCurrentClocks(clocks)
+	{}
+
+	~ClocksCounter()
+	{
+		mEndClocks = *mCurrentClocks;
+		mClocksElapsed = mStartClocks - mEndClocks + 1;
+		printf("Elapsed %i clocks\n", mClocksElapsed);
+	}
+
+};
+
 class Cpu
 {
 private:
@@ -37,4 +62,12 @@ public:
 	void LdaIm();
 	void LdaZp();
 	void Nop();
+
+private:
+	void SetRegister(uint8_t& r, uint8_t value);
+	bool AddressPageWillBeCrossed(uint8_t lo, uint8_t hi, uint8_t offset) const;
+
+	uint8_t ReadByte(uint16_t address);
+	uint16_t ReadWord(uint16_t address);
+	uint16_t ReadWord(uint16_t address, uint8_t* outLo, uint8_t* outHi);
 };
