@@ -5,11 +5,6 @@
 #include "Components/Memory/Ram.h"
 #include "Components/Memory/Rom.h"
 
-Cpu* mCpu;
-Bus* mBus;
-Ram* mRam;
-Rom* mRom;
-
 void CreateRomPreloadData(std::vector<uint8_t>& preloadData)
 {
 	// lda
@@ -79,25 +74,29 @@ int main()
 	std::vector<uint8_t> romData;
 	CreateRomPreloadData(romData);
 
-	mBus = new Bus();
-	mCpu = new Cpu(mBus);
-	
-	mRam = new Ram();
-	mRom = new Rom(std::move(romData));
+	Cpu* cpu;
+	Bus* bus;
+	Ram* ram;
+	Rom* rom;
 
-	mBus->ConnectDevice(mRam, {0x0000, 0x3fff});
-	mBus->ConnectDevice(mRom, {0x8000, 0xffff});
+	bus = new Bus();
+	cpu = new Cpu(bus);	
+	ram = new Ram();
+	rom = new Rom(std::move(romData));
 
-	mBus->WriteByte(0x0042, 0x13);
-	mBus->WriteByte(0x000d, 0xff);
-	mBus->WriteByte(0x0060, 0x08);
-	mBus->WriteByte(0x0061, 0x80);
+	bus->ConnectDevice(ram, {0x0000, 0x3fff});
+	bus->ConnectDevice(rom, {0x8000, 0xffff});
 
-	mCpu->Reset();
-	mCpu->Clock(100);
+	bus->WriteByte(0x0042, 0x13);
+	bus->WriteByte(0x000d, 0xff);
+	bus->WriteByte(0x0060, 0x08);
+	bus->WriteByte(0x0061, 0x80);
 
-	delete mCpu;
-	delete mBus;
-	delete mRam;
-	delete mRom;
+	cpu->Reset();
+	cpu->Clock(100);
+
+	delete cpu;
+	delete bus;
+	delete ram;
+	delete rom;
 }
