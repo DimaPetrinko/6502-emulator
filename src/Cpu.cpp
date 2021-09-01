@@ -2,6 +2,7 @@
 
 #include "Cpu_lda.h"
 #include "Cpu_ldx.h"
+#include "Cpu_ldy.h"
 
 Cpu::Cpu(Bus* bus) : mBus(bus) {}
 
@@ -60,6 +61,22 @@ void Cpu::Clock()
 		LdxAbsY();
 		break;
 
+	case ldy_im:
+		LdyIm();
+		break;
+	case ldy_zp:
+		LdyZp();
+		break;
+	case ldy_zpx:
+		LdyZpX();
+		break;
+	case ldy_abs:
+		LdyAbs();
+		break;
+	case ldy_absx:
+		LdyAbsX();
+		break;
+
 	case nop:
 		Nop();
 		break;
@@ -68,6 +85,8 @@ void Cpu::Clock()
 		printf("Undefined opeeration! %x\n", instruction);
 		break;
 	}
+
+	// visualize registers and maybe data?
 }
 
 void Cpu::Clock(int times)

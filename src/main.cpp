@@ -13,22 +13,22 @@ Rom* mRom;
 void CreateRomPreloadData(std::vector<uint8_t>& preloadData)
 {
 	// lda
-	// preloadData.push_back(lda_im);
-	// preloadData.push_back(0x28);
-	// preloadData.push_back(lda_zp);
-	// preloadData.push_back(0x42);
-	// preloadData.push_back(lda_zpx);
-	// preloadData.push_back(0x0d);
-	// preloadData.push_back(lda_abs);
-	// preloadData.push_back(0x02);
-	// preloadData.push_back(0x80);
-	// preloadData.push_back(lda_absx);
-	// preloadData.push_back(0xf0);
-	// preloadData.push_back(0x80);
-	// preloadData.push_back(lda_indx);
-	// preloadData.push_back(0x60);
-	// preloadData.push_back(lda_indy);
-	// preloadData.push_back(0x60);
+	preloadData.push_back(lda_im);
+	preloadData.push_back(0x28);
+	preloadData.push_back(lda_zp);
+	preloadData.push_back(0x42);
+	preloadData.push_back(lda_zpx);
+	preloadData.push_back(0x0d);
+	preloadData.push_back(lda_abs);
+	preloadData.push_back(0x02);
+	preloadData.push_back(0x80);
+	preloadData.push_back(lda_absx);
+	preloadData.push_back(0xf0);
+	preloadData.push_back(0x80);
+	preloadData.push_back(lda_indx);
+	preloadData.push_back(0x60);
+	preloadData.push_back(lda_indy);
+	preloadData.push_back(0x60);
 
 	// ldx
 	preloadData.push_back(ldx_im);
@@ -40,7 +40,21 @@ void CreateRomPreloadData(std::vector<uint8_t>& preloadData)
 	preloadData.push_back(ldx_abs);
 	preloadData.push_back(0x02);
 	preloadData.push_back(0x80);
-	preloadData.push_back(lda_absy);
+	preloadData.push_back(ldx_absy);
+	preloadData.push_back(0xf0);
+	preloadData.push_back(0x80);
+
+	// ldy
+	preloadData.push_back(ldy_im);
+	preloadData.push_back(0x28);
+	preloadData.push_back(ldy_zp);
+	preloadData.push_back(0x42);
+	preloadData.push_back(ldy_zpx);
+	preloadData.push_back(0x0d);
+	preloadData.push_back(ldy_abs);
+	preloadData.push_back(0x02);
+	preloadData.push_back(0x80);
+	preloadData.push_back(ldy_absx);
 	preloadData.push_back(0xf0);
 	preloadData.push_back(0x80);
 

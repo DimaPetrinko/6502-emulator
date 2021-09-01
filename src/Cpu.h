@@ -75,6 +75,12 @@ private:
 	void LdxAbs();
 	void LdxAbsY();
 
+	void LdyIm();
+	void LdyZp();
+	void LdyZpX();
+	void LdyAbs();
+	void LdyAbsX();
+
 	void Nop();
 
 private:
