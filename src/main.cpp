@@ -1,9 +1,9 @@
 #include <iostream>
 #include <vector>
-#include "Cpu.h"
-#include "Bus.h"
-#include "Ram.h"
-#include "Rom.h"
+#include "Components/Cpu/Cpu.h"
+#include "Components/Bus.h"
+#include "Components/Memory/Ram.h"
+#include "Components/Memory/Rom.h"
 
 Cpu* mCpu;
 Bus* mBus;

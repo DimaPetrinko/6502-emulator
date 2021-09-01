@@ -1,8 +1,8 @@
 #pragma once
 
 #include <stdint.h>
-#include "CpuConstants.h"
-#include "Bus.h"
+#include "Components/Cpu/CpuConstants.h"
+#include "Components/Bus.h"
 
 class ClocksCounter
 {

@@ -1,8 +1,8 @@
 #include "Cpu.h"
 
-#include "Cpu_lda.h"
-#include "Cpu_ldx.h"
-#include "Cpu_ldy.h"
+#include "Components/Cpu/Instructions/Cpu_lda.h"
+#include "Components/Cpu/Instructions/Cpu_ldx.h"
+#include "Components/Cpu/Instructions/Cpu_ldy.h"
 
 Cpu::Cpu(Bus* bus) : mBus(bus) {}
 

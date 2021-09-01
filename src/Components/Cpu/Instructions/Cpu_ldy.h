@@ -1,4 +1,4 @@
-#include "Cpu.h"
+#include "Components/Cpu/Cpu.h"
 
 void Cpu::LdyIm()
 {
