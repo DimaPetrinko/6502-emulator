@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdint.h>
-#include <vector>
+#include <string>
 #include "Components/Device.h"
 
 class Rom : public Device
@@ -9,8 +9,7 @@ class Rom : public Device
 private:
 	uint8_t mCells[MemoryChipSize];
 public:
-	Rom(const std::vector<uint8_t>& preloadedData);
-	Rom(const std::vector<uint8_t>& preloadedData, uint16_t address);
+	Rom(const std::string& filePath);
 	~Rom();
 
 	uint8_t ReadData(uint16_t address) const override;
