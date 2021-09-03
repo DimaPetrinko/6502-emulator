@@ -11,9 +11,6 @@ void CreateRomPreloadData(std::vector<uint8_t>& preloadData)
 
 int main()
 {
-	#ifdef DEBUG
-	std::cout << "Debug\n";
-	#endif
 	std::vector<uint8_t> romData;
 	CreateRomPreloadData(romData);
 
@@ -36,7 +33,15 @@ int main()
 	bus->WriteByte(0x0061, 0x80);
 
 	cpu->Reset();
-	cpu->Clock(100);
+
+	char exitChar;
+	while (1)
+	{
+		cpu->ShowState();
+		exitChar = std::cin.get();
+		if (exitChar == 'q') break;
+		cpu->Clock();
+	}
 
 	delete cpu;
 	delete bus;

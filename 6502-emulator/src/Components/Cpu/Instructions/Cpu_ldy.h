@@ -18,7 +18,7 @@ void Cpu::LdyZpX()
 	auto c = ClocksCounter(&mCycles);
 	uint8_t zeroPageAddress = ReadByte(pc++);
 	zeroPageAddress += x;
-	mCycles--;
+	mCycles++;
 	SetRegister(y, ReadByte(zeroPageAddress));
 }
 
@@ -37,6 +37,6 @@ void Cpu::LdyAbsX()
 	uint16_t address = ReadWord(pc, &lo, &hi);
 	pc += 2;
 	address += x; // another cycle?
-	if (AddressPageWillBeCrossed(lo, hi, y)) mCycles--;
+	if (AddressPageWillBeCrossed(lo, hi, y)) mCycles++;
 	SetRegister(y, ReadByte(address));
 }

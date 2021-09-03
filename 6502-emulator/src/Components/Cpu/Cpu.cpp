@@ -1,5 +1,6 @@
 #include "Cpu.h"
 
+#include <iostream>
 #include "Components/Cpu/Instructions/Cpu_lda.h"
 #include "Components/Cpu/Instructions/Cpu_ldx.h"
 #include "Components/Cpu/Instructions/Cpu_ldy.h"
@@ -10,15 +11,19 @@ Cpu::~Cpu() {}
 
 void Cpu::Reset()
 {
-	pc = mBus->ReadWord(ResetLocation);
+	mCycles = 7;
+	pc = ReadWord(ResetLocation);
 	sp = StackEnd - StackStart;
+	a = 0;
+	x = 0;
+	y = 0;
 }
 
 void Cpu::Clock()
 {
-	uint8_t instruction = ReadByte(pc++);
+	mInstruction = ReadByte(pc++);
 
-	switch (instruction)
+	switch (mInstruction)
 	{
 	case lda_im:
 		LdaIm();
@@ -82,23 +87,30 @@ void Cpu::Clock()
 		break;
 	
 	default:
-		printf("Undefined opeeration! %x\n", instruction);
+		printf("Undefined opeeration! %x\n", mInstruction);
 		break;
 	}
 
 	// visualize registers and maybe data?
 }
 
-void Cpu::Clock(int times)
+void Cpu::ShowState()
 {
-	mCycles = times;
-	while(mCycles > 0) Clock();
+	printf("Cycles:      %i\n", mCycles);
+	printf("instruction: %x\n", mInstruction);
+	printf("pc:          %x\n", pc);
+	printf("sp:          %x\n", sp);
+	printf("a:           %x\n", a);
+	printf("x:           %x\n", x);
+	printf("y:           %x\n", y);
+	printf("c z i d b o n\n");
+	printf("%i %i %i %i %i %i %i \n", c, z, i, d, b, o, n);
 }
 
 void Cpu::Nop()
 {
 	auto c = ClocksCounter(&mCycles);
-	mCycles--;
+	mCycles++;
 }
 
 void Cpu::SetRegister(uint8_t& r, uint8_t value)
@@ -117,18 +129,18 @@ bool Cpu::AddressPageWillBeCrossed(uint8_t lo, uint8_t hi, uint8_t offset) const
 
 uint8_t Cpu::ReadByte(uint16_t address)
 {
-	mCycles--;
+	mCycles++;
 	return mBus->ReadByte(address);
 }
 
 uint16_t Cpu::ReadWord(uint16_t address)
 {
-	mCycles -= 2;
+	mCycles += 2;
 	return mBus->ReadWord(address);
 }
 
 uint16_t Cpu::ReadWord(uint16_t address, uint8_t* outLo, uint8_t* outHi)
 {
-	mCycles -= 2;
+	mCycles += 2;
 	return mBus->ReadWord(address, outLo, outHi);
 }

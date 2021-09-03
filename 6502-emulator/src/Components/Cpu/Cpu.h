@@ -10,10 +10,10 @@ private:
 	int mStartClocks;
 	int mEndClocks;
 	int mClocksElapsed;
-	int* mCurrentClocks;
+	size_t* mCurrentClocks;
 
 public:
-	ClocksCounter(int* clocks) :
+	ClocksCounter(size_t* clocks) :
 		mStartClocks(*clocks),
 		mEndClocks(0),
 		mClocksElapsed(0),
@@ -23,7 +23,7 @@ public:
 	~ClocksCounter()
 	{
 		mEndClocks = *mCurrentClocks;
-		mClocksElapsed = mStartClocks - mEndClocks + 1;
+		mClocksElapsed = mEndClocks - mStartClocks + 1;
 		printf("Elapsed %i clocks\n", mClocksElapsed);
 	}
 
@@ -49,7 +49,8 @@ private:
 	uint8_t o : 1;
 	uint8_t n : 1;
 
-	int mCycles;
+	uint8_t mInstruction;
+	size_t mCycles;
 
 public:
 	Cpu(Bus* bus);
@@ -57,7 +58,8 @@ public:
 
 	void Reset();
 	void Clock();
-	void Clock(int times);
+
+	void ShowState();
 
 private:
 	void LdaIm();

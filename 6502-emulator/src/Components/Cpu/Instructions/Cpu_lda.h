@@ -18,7 +18,7 @@ void Cpu::LdaZpX()
 	auto c = ClocksCounter(&mCycles);
 	uint8_t zeroPageAddress = ReadByte(pc++);
 	zeroPageAddress += x;
-	mCycles--;
+	mCycles++;
 	SetRegister(a, ReadByte(zeroPageAddress));
 }
 
@@ -37,7 +37,7 @@ void Cpu::LdaAbsX()
 	uint16_t address = ReadWord(pc, &lo, &hi);
 	pc += 2;
 	address += x; // another cycle?
-	if (AddressPageWillBeCrossed(lo, hi, x)) mCycles--;
+	if (AddressPageWillBeCrossed(lo, hi, x)) mCycles++;
 	SetRegister(a, ReadByte(address));
 }
 
@@ -48,7 +48,7 @@ void Cpu::LdaAbsY()
 	uint16_t address = ReadWord(pc, &lo, &hi);
 	pc += 2;
 	address += y; // another cycle?
-	if (AddressPageWillBeCrossed(lo, hi, y)) mCycles--;
+	if (AddressPageWillBeCrossed(lo, hi, y)) mCycles++;
 	SetRegister(a, ReadByte(address));
 }
 
@@ -57,7 +57,7 @@ void Cpu::LdaIndX()
 	auto c = ClocksCounter(&mCycles);
 	uint8_t zeroPageAddress = ReadByte(pc++);
 	zeroPageAddress += x;
-	mCycles--;
+	mCycles++;
 	uint16_t realAddress = ReadWord(zeroPageAddress);
 	SetRegister(a, ReadByte(realAddress));
 }
@@ -70,6 +70,6 @@ void Cpu::LdaIndY()
 	uint8_t lo, hi;
 	uint16_t realAddress = ReadWord(zeroPageAddress, &lo, &hi);
 	realAddress += y;
-	if (AddressPageWillBeCrossed(lo, hi, y)) mCycles--;
+	if (AddressPageWillBeCrossed(lo, hi, y)) mCycles++;
 	SetRegister(a, ReadByte(realAddress));
 }
