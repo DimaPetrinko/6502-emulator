@@ -1,7 +1,6 @@
 #pragma once
 
 #include <stdint.h>
-#include "Components/Cpu/CpuConstants.h"
 #include "Components/Bus.h"
 
 class ClocksCounter
@@ -31,9 +30,7 @@ public:
 
 class Cpu
 {
-private:
-	Bus* mBus;
-
+public:
 	uint16_t pc;
 	uint8_t sp;
 
@@ -49,8 +46,11 @@ private:
 	uint8_t o : 1;
 	uint8_t n : 1;
 
-	uint8_t mInstruction;
-	size_t mCycles;
+	uint8_t Instruction;
+	size_t Cycles;
+
+private:
+	Bus* mBus;
 
 public:
 	Cpu(Bus* bus);
@@ -59,29 +59,10 @@ public:
 	void Reset();
 	void Clock();
 
-	void ShowState();
-
 private:
-	void LdaIm();
-	void LdaZp();
-	void LdaZpX();
-	void LdaAbs();
-	void LdaAbsX();
-	void LdaAbsY();
-	void LdaIndX();
-	void LdaIndY();
-
-	void LdxIm();
-	void LdxZp();
-	void LdxZpY();
-	void LdxAbs();
-	void LdxAbsY();
-
-	void LdyIm();
-	void LdyZp();
-	void LdyZpX();
-	void LdyAbs();
-	void LdyAbsX();
+	#include "Components/Cpu/Instructions/Cpu_lda_definition.h"
+	#include "Components/Cpu/Instructions/Cpu_ldx_definition.h"
+	#include "Components/Cpu/Instructions/Cpu_ldy_definition.h"
 
 	void Nop();
 

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include "Components/Cpu/CpuVisualizer.h"
 #include "Components/Cpu/Cpu.h"
 #include "Components/Bus.h"
 #include "Components/Memory/Ram.h"
@@ -14,15 +15,12 @@ int main()
 	std::vector<uint8_t> romData;
 	CreateRomPreloadData(romData);
 
-	Cpu* cpu;
-	Bus* bus;
-	Ram* ram;
-	Rom* rom;
+	CpuVisualizer visualizer;
 
-	bus = new Bus();
-	cpu = new Cpu(bus);	
-	ram = new Ram();
-	rom = new Rom("res/program.bin");
+	Bus* bus = new Bus();
+	Cpu* cpu = new Cpu(bus);
+	Ram* ram = new Ram();
+	Rom* rom = new Rom("res/program.bin");
 
 	bus->ConnectDevice(ram, {0x0000, 0x3fff});
 	bus->ConnectDevice(rom, {0x8000, 0xffff});
@@ -37,7 +35,7 @@ int main()
 	char exitChar;
 	while (1)
 	{
-		cpu->ShowState();
+		visualizer.Visualize(cpu);
 		exitChar = std::cin.get();
 		if (exitChar == 'q') break;
 		cpu->Clock();

@@ -1,0 +1,1 @@
+#define adc_im 0x69
