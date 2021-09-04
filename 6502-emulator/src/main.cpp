@@ -6,29 +6,26 @@
 #include "Components/Memory/Ram.h"
 #include "Components/Memory/Rom.h"
 
-void CreateRomPreloadData(std::vector<uint8_t>& preloadData)
-{
-}
-
 int main()
 {
-	std::vector<uint8_t> romData;
-	CreateRomPreloadData(romData);
-
 	CpuVisualizer visualizer;
 
 	Bus* bus = new Bus();
 	Cpu* cpu = new Cpu(bus);
 	Ram* ram = new Ram();
-	Rom* rom = new Rom("res/program.bin");
+	Rom* rom = new Rom();
+	// rom->Load("res/lda_test.bin");
+	// rom->Load("res/ldx_test.bin");
+	// rom->Load("res/ldy_test.bin");
+	rom->Load("res/adc_test.bin");
 
 	bus->ConnectDevice(ram, {0x0000, 0x3fff});
 	bus->ConnectDevice(rom, {0x8000, 0xffff});
 
-	bus->WriteByte(0x0042, 0x13);
-	bus->WriteByte(0x000d, 0xff);
-	bus->WriteByte(0x0060, 0x08);
-	bus->WriteByte(0x0061, 0x80);
+	bus->WriteByte(0x0000, 0x02);
+	bus->WriteByte(0x0001, 0x03);
+	bus->WriteByte(0x0002, 0x00);
+	bus->WriteByte(0x0003, 0x80);
 
 	cpu->Reset();
 

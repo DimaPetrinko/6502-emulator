@@ -6,7 +6,7 @@
 class CpuVisualizer
 {
 private:
-	std::unordered_map<uint8_t, char*> mInstructionNames;
+	std::unordered_map<uint8_t, const char*> mInstructionNames;
 public:
 	CpuVisualizer();
 	void Visualize(Cpu* cpu);

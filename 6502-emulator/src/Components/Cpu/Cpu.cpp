@@ -5,6 +5,7 @@
 #include "Components/Cpu/Instructions/Cpu_lda.h"
 #include "Components/Cpu/Instructions/Cpu_ldx.h"
 #include "Components/Cpu/Instructions/Cpu_ldy.h"
+#include "Components/Cpu/Instructions/Cpu_adc.h"
 
 Cpu::Cpu(Bus* bus) : mBus(bus) {}
 
@@ -83,6 +84,31 @@ void Cpu::Clock()
 		LdyAbsX();
 		break;
 
+	case adc_im:
+		AdcIm();
+		break;
+	case adc_zp:
+		AdcZp();
+		break;
+	case adc_zpx:
+		AdcZpX();
+		break;
+	case adc_abs:
+		AdcAbs();
+		break;
+	case adc_absx:
+		AdcAbsX();
+		break;
+	case adc_absy:
+		AdcAbsY();
+		break;
+	case adc_indx:
+		AdcIndX();
+		break;
+	case adc_indy:
+		AdcIndY();
+		break;
+
 	case nop:
 		Nop();
 		break;
@@ -91,8 +117,6 @@ void Cpu::Clock()
 		printf("Undefined opeeration! %x\n", Instruction);
 		break;
 	}
-
-	// visualize registers and maybe data?
 }
 
 void Cpu::Nop()
@@ -106,6 +130,14 @@ void Cpu::SetRegister(uint8_t& r, uint8_t value)
 	r = value;
 	z = r == 0;
 	n = r & (1 << 7);
+}
+
+void Cpu::SetAWithArithmeticFlags(uint8_t value, uint16_t result)
+{
+	c = result >> 8;
+	v = value >> 7 == n && n != (result & 0xff) >> 7;
+
+	SetRegister(a, result);
 }
 
 bool Cpu::AddressPageWillBeCrossed(uint8_t lo, uint8_t hi, uint8_t offset) const
