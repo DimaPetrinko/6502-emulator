@@ -1,0 +1,12 @@
+  lda #$01
+  lda $00
+  ldx #$01
+  lda $00,x
+  lda $8000
+  lda $8000,x
+  ldy #$02
+  lda $8000,y
+  ldx #$02
+  lda ($00,x)
+  ldy #$02
+  lda ($02),y
