@@ -129,7 +129,7 @@ void Cpu::SetRegister(uint8_t& r, uint8_t value)
 {
 	r = value;
 	z = r == 0;
-	n = r & (1 << 7);
+	n = r >> 7;
 }
 
 void Cpu::SetAWithArithmeticFlags(uint8_t value, uint16_t result)
