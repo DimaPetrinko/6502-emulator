@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include "Components/Cpu/CpuVisualizer.h"
 #include "Components/Cpu/Cpu.h"
 #include "Components/Bus.h"
@@ -14,10 +13,16 @@ int main()
 	Cpu* cpu = new Cpu(bus);
 	Ram* ram = new Ram();
 	Rom* rom = new Rom();
-	// rom->Load("res/lda_test.bin");
-	// rom->Load("res/ldx_test.bin");
-	// rom->Load("res/ldy_test.bin");
-	rom->Load("res/adc_test.bin");
+
+	uint16_t loadOffset = 0x00;
+	rom->Load("res/lda_test.bin", loadOffset);
+	loadOffset += 0x1b;
+	rom->Load("res/ldx_test.bin", loadOffset);
+	loadOffset += 0x10;
+	rom->Load("res/ldy_test.bin", loadOffset);
+	loadOffset += 0x10;
+	rom->Load("res/adc_test.bin", loadOffset);
+	loadOffset += 0x0e;
 
 	bus->ConnectDevice(ram, {0x0000, 0x3fff});
 	bus->ConnectDevice(rom, {0x8000, 0xffff});

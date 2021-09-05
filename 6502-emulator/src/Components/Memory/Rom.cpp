@@ -16,15 +16,14 @@ Rom::~Rom()
 {
 }
 
-void Rom::Load(const std::string& filePath)
+void Rom::Load(const std::string& filePath, uint16_t offset)
 {
 	std::ifstream file(filePath);
 	if (file)
 	{
-		size_t i = 0;
 		while (!file.eof())
 		{
-			file >> mCells[i++];
+			file >> mCells[offset++];
 		}
 	} 
 	else std::cout << "Could not open the file " << filePath << std::endl;

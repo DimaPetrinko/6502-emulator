@@ -12,7 +12,7 @@ public:
 	Rom();
 	~Rom();
 
-	void Load(const std::string& filePath);
+	void Load(const std::string& filePath, uint16_t offset = 0x00);
 	uint8_t ReadData(uint16_t address) const override;
 	void WriteData(uint16_t address, uint8_t data) override;
 };
