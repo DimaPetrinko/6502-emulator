@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <unordered_map>
 #include "Components/Bus.h"
 
 class ClocksCounter
@@ -51,6 +52,7 @@ public:
 
 private:
 	Bus* mBus;
+	std::unordered_map<uint8_t, void (Cpu::*)()> mInstructionFunctions;
 
 public:
 	Cpu(Bus* bus);

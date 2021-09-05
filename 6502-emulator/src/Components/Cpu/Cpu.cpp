@@ -7,7 +7,40 @@
 #include "Components/Cpu/Instructions/Cpu_ldy.h"
 #include "Components/Cpu/Instructions/Cpu_adc.h"
 
-Cpu::Cpu(Bus* bus) : mBus(bus) {}
+Cpu::Cpu(Bus* bus) : mBus(bus)
+{
+	mInstructionFunctions[lda_im] = &Cpu::LdaIm;
+	mInstructionFunctions[lda_zp] = &Cpu::LdaZp;
+	mInstructionFunctions[lda_zpx] = &Cpu::LdaZpX;
+	mInstructionFunctions[lda_abs] = &Cpu::LdaAbs;
+	mInstructionFunctions[lda_absx] = &Cpu::LdaAbsX;
+	mInstructionFunctions[lda_absy] = &Cpu::LdaAbsY;
+	mInstructionFunctions[lda_indx] = &Cpu::LdaIndX;
+	mInstructionFunctions[lda_indy] = &Cpu::LdaIndY;
+
+	mInstructionFunctions[ldx_im] = &Cpu::LdxIm;
+	mInstructionFunctions[ldx_zp] = &Cpu::LdxZp;
+	mInstructionFunctions[ldx_zpy] = &Cpu::LdxZpY;
+	mInstructionFunctions[ldx_abs] = &Cpu::LdxAbs;
+	mInstructionFunctions[ldx_absy] = &Cpu::LdxAbsY;
+	
+	mInstructionFunctions[ldy_im] = &Cpu::LdyIm;
+	mInstructionFunctions[ldy_zp] = &Cpu::LdyZp;
+	mInstructionFunctions[ldy_zpx] = &Cpu::LdyZpX;
+	mInstructionFunctions[ldy_abs] = &Cpu::LdyAbs;
+	mInstructionFunctions[ldy_absx] = &Cpu::LdyAbsX;
+
+	mInstructionFunctions[adc_im] = &Cpu::AdcIm;
+	mInstructionFunctions[adc_zp] = &Cpu::AdcZp;
+	mInstructionFunctions[adc_zpx] = &Cpu::AdcZpX;
+	mInstructionFunctions[adc_abs] = &Cpu::AdcAbs;
+	mInstructionFunctions[adc_absx] = &Cpu::AdcAbsX;
+	mInstructionFunctions[adc_absy] = &Cpu::AdcAbsY;
+	mInstructionFunctions[adc_indx] = &Cpu::AdcIndX;
+	mInstructionFunctions[adc_indy] = &Cpu::AdcIndY;
+	
+	mInstructionFunctions[nop] = &Cpu::Nop;
+}
 
 Cpu::~Cpu() {}
 
@@ -25,98 +58,9 @@ void Cpu::Clock()
 {
 	Instruction = ReadByte(pc++);
 
-	switch (Instruction)
-	{
-	case lda_im:
-		LdaIm();
-		break;
-	case lda_zp:
-		LdaZp();
-		break;
-	case lda_zpx:
-		LdaZpX();
-		break;
-	case lda_abs:
-		LdaAbs();
-		break;
-	case lda_absx:
-		LdaAbsX();
-		break;
-	case lda_absy:
-		LdaAbsY();
-		break;
-	case lda_indx:
-		LdaIndX();
-		break;
-	case lda_indy:
-		LdaIndY();
-		break;
-
-	case ldx_im:
-		LdxIm();
-		break;
-	case ldx_zp:
-		LdxZp();
-		break;
-	case ldx_zpy:
-		LdxZpY();
-		break;
-	case ldx_abs:
-		LdxAbs();
-		break;
-	case ldx_absy:
-		LdxAbsY();
-		break;
-
-	case ldy_im:
-		LdyIm();
-		break;
-	case ldy_zp:
-		LdyZp();
-		break;
-	case ldy_zpx:
-		LdyZpX();
-		break;
-	case ldy_abs:
-		LdyAbs();
-		break;
-	case ldy_absx:
-		LdyAbsX();
-		break;
-
-	case adc_im:
-		AdcIm();
-		break;
-	case adc_zp:
-		AdcZp();
-		break;
-	case adc_zpx:
-		AdcZpX();
-		break;
-	case adc_abs:
-		AdcAbs();
-		break;
-	case adc_absx:
-		AdcAbsX();
-		break;
-	case adc_absy:
-		AdcAbsY();
-		break;
-	case adc_indx:
-		AdcIndX();
-		break;
-	case adc_indy:
-		AdcIndY();
-		break;
-
-	case nop:
-		Nop();
-		break;
-	
-	default:
-		printf("Undefined opeeration! %x\n", Instruction);
-		break;
-	}
+	void (Cpu::*instructionFunction)() = mInstructionFunctions[Instruction];
+	if (instructionFunction == nullptr) printf("Undefined operation! %x\n", Instruction);
+	else (this->*instructionFunction)();
 }
 
 void Cpu::Nop()
