@@ -16,18 +16,19 @@ Rom::~Rom()
 {
 }
 
-void Rom::Load(const std::string& filePath, uint16_t offset)
+void Rom::Load(const std::string& filePath, uint16_t& outOffset)
 {
 	std::ifstream file(filePath);
 	if (file)
 	{
 		while (!file.eof())
 		{
-			file >> mCells[offset++];
+			file >> mCells[outOffset++];
 		}
 	} 
 	else std::cout << "Could not open the file " << filePath << std::endl;
 	file.close();
+	outOffset--; // file read takes extra cycle
 }
 
 uint8_t Rom::ReadData(uint16_t address) const
