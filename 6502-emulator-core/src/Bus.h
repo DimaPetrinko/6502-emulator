@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 #include <unordered_map>
-#include "Components/Device.h"
+#include "Device.h"
 
 struct AddressRange
 {

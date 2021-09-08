@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 #include <unordered_map>
-#include "Components/Bus.h"
+#include "Bus.h"
 
 class ClocksCounter
 {
@@ -62,10 +62,10 @@ public:
 	void Clock();
 
 private:
-	#include "Components/Cpu/Instructions/Cpu_lda_definition.h"
-	#include "Components/Cpu/Instructions/Cpu_ldx_definition.h"
-	#include "Components/Cpu/Instructions/Cpu_ldy_definition.h"
-	#include "Components/Cpu/Instructions/Cpu_adc_definition.h"
+	#include "Cpu/Instructions/Cpu_lda_definition.h"
+	#include "Cpu/Instructions/Cpu_ldx_definition.h"
+	#include "Cpu/Instructions/Cpu_ldy_definition.h"
+	#include "Cpu/Instructions/Cpu_adc_definition.h"
 
 	void Nop();
 

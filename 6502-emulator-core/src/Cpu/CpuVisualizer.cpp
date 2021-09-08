@@ -1,6 +1,6 @@
 #include "CpuVisualizer.h"
 
-#include "Components/Cpu/CpuConstants.h"
+#include "Cpu/CpuConstants.h"
 
 CpuVisualizer::CpuVisualizer()
 {

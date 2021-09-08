@@ -1,18 +1,16 @@
 #pragma once
 
 #include <stdint.h>
-#include <string>
-#include "Components/Device.h"
+#include "Device.h"
 
-class Rom : public Device
+class Ram : public Device
 {
 private:
 	uint8_t mCells[MemoryChipSize];
 public:
-	Rom();
-	~Rom();
+	Ram();
+	~Ram();
 
-	void Load(const std::string& filePath, uint16_t& outOffset);
 	uint8_t ReadData(uint16_t address) const override;
 	void WriteData(uint16_t address, uint8_t data) override;
 };

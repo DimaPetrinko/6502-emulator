@@ -1,7 +1,7 @@
 #pragma once
 
 #include <unordered_map>
-#include "Components/Cpu/Cpu.h"
+#include "Cpu/Cpu.h"
 
 class CpuVisualizer
 {

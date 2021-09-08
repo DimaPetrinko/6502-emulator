@@ -1,89 +1,82 @@
-#include "Components/Cpu/Cpu.h"
+#include "Cpu/Cpu.h"
 
-void Cpu::AdcIm()
+void Cpu::LdaIm()
 {
-	auto cl = ClocksCounter(&Cycles);
-	Value = AddWithCarry(pc++);
+	auto c = ClocksCounter(&Cycles);
+	Value = ReadByte(pc++);
+	SetRegister(a, Value);
 }
 
-void Cpu::AdcZp()
+void Cpu::LdaZp()
 {
-	auto cl = ClocksCounter(&Cycles);
+	auto c = ClocksCounter(&Cycles);
 	uint8_t zeroPageAddress = ReadByte(pc++);
 	Value = zeroPageAddress;
-	AddWithCarry(zeroPageAddress);
+	SetRegister(a, ReadByte(zeroPageAddress));
 }
 
-void Cpu::AdcZpX()
+void Cpu::LdaZpX()
 {
-	auto cl = ClocksCounter(&Cycles);
+	auto c = ClocksCounter(&Cycles);
 	uint8_t zeroPageAddress = ReadByte(pc++);
 	Value = zeroPageAddress;
 	zeroPageAddress += x;
 	Cycles++;
-	AddWithCarry(zeroPageAddress);
+	SetRegister(a, ReadByte(zeroPageAddress));
 }
 
-void Cpu::AdcAbs()
+void Cpu::LdaAbs()
 {
-	auto cl = ClocksCounter(&Cycles);
+	auto c = ClocksCounter(&Cycles);
 	uint16_t address = ReadWord(pc);
 	pc += 2;
 	Value = address;
-	AddWithCarry(address);
+	SetRegister(a, ReadByte(address));
 }
 
-void Cpu::AdcAbsX()
+void Cpu::LdaAbsX()
 {
-	auto cl = ClocksCounter(&Cycles);
+	auto c = ClocksCounter(&Cycles);
 	uint8_t lo, hi;
 	uint16_t address = ReadWord(pc, &lo, &hi);
 	pc += 2;
 	Value = address;
 	address += x; // another cycle?
 	if (AddressPageWillBeCrossed(lo, hi, x)) Cycles++;
-	AddWithCarry(address);
+	SetRegister(a, ReadByte(address));
 }
 
-void Cpu::AdcAbsY()
+void Cpu::LdaAbsY()
 {
-	auto cl = ClocksCounter(&Cycles);
+	auto c = ClocksCounter(&Cycles);
 	uint8_t lo, hi;
 	uint16_t address = ReadWord(pc, &lo, &hi);
 	pc += 2;
 	Value = address;
 	address += y; // another cycle?
 	if (AddressPageWillBeCrossed(lo, hi, y)) Cycles++;
-	AddWithCarry(address);
+	SetRegister(a, ReadByte(address));
 }
 
-void Cpu::AdcIndX()
+void Cpu::LdaIndX()
 {
-	auto cl = ClocksCounter(&Cycles);
+	auto c = ClocksCounter(&Cycles);
 	uint8_t zeroPageAddress = ReadByte(pc++);
 	Value = zeroPageAddress;
 	zeroPageAddress += x;
 	Cycles++;
 	uint16_t realAddress = ReadWord(zeroPageAddress);
-	AddWithCarry(realAddress);
+	SetRegister(a, ReadByte(realAddress));
 }
 
-void Cpu::AdcIndY()
+void Cpu::LdaIndY()
 {
-	auto cl = ClocksCounter(&Cycles);
+	auto c = ClocksCounter(&Cycles);
 	uint8_t zeroPageAddress = ReadByte(pc++);
 	Value = zeroPageAddress;
 	uint8_t lo, hi;
 	uint16_t realAddress = ReadWord(zeroPageAddress, &lo, &hi);
 	realAddress += y;
 	if (AddressPageWillBeCrossed(lo, hi, y)) Cycles++;
-	AddWithCarry(realAddress);
-}
-
-uint8_t Cpu::AddWithCarry(uint16_t address)
-{
-	uint8_t value = ReadByte(address);
-	uint16_t result = a + value + c;
-	SetAWithArithmeticFlags(value, result);
-	return value;
+	SetRegister(a, ReadByte(realAddress));
 }

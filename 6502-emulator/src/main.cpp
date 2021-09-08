@@ -1,9 +1,9 @@
 #include <iostream>
-#include "Components/Cpu/CpuVisualizer.h"
-#include "Components/Cpu/Cpu.h"
-#include "Components/Bus.h"
-#include "Components/Memory/Ram.h"
-#include "Components/Memory/Rom.h"
+#include "Cpu/CpuVisualizer.h"
+#include "Cpu/Cpu.h"
+#include "Bus.h"
+#include "Memory/Ram.h"
+#include "Memory/Rom.h"
 
 int main()
 {
@@ -13,7 +13,6 @@ int main()
 	Cpu* cpu = new Cpu(bus);
 	Ram* ram = new Ram();
 	Rom* rom = new Rom();
-
 
 	uint16_t loadOffset = 0x00;
 	rom->Load("res/lda_test.bin", loadOffset);

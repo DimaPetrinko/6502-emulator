@@ -1,4 +1,4 @@
-#include "Components/Cpu/Cpu.h"
+#include "Cpu/Cpu.h"
 
 void Cpu::LdxIm()
 {

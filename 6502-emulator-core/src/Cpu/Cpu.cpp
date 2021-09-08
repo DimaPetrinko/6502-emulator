@@ -1,11 +1,11 @@
 #include "Cpu.h"
 
 #include <iostream>
-#include "Components/Cpu/CpuConstants.h"
-#include "Components/Cpu/Instructions/Cpu_lda.h"
-#include "Components/Cpu/Instructions/Cpu_ldx.h"
-#include "Components/Cpu/Instructions/Cpu_ldy.h"
-#include "Components/Cpu/Instructions/Cpu_adc.h"
+#include "Cpu/CpuConstants.h"
+#include "Cpu/Instructions/Cpu_lda.h"
+#include "Cpu/Instructions/Cpu_ldx.h"
+#include "Cpu/Instructions/Cpu_ldy.h"
+#include "Cpu/Instructions/Cpu_adc.h"
 
 Cpu::Cpu(Bus* bus) : mBus(bus)
 {
