@@ -49,9 +49,18 @@ void Cpu::Reset()
 	Cycles = 7;
 	pc = ReadWord(ResetLocation);
 	sp = StackEnd - StackStart;
+
 	a = 0;
 	x = 0;
 	y = 0;
+
+	c = 0;
+	z = 0;
+	i = 0;
+	d = 0;
+	b = 0;
+	v = 0;
+	n = 0;
 }
 
 void Cpu::Clock()

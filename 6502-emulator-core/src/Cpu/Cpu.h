@@ -24,7 +24,7 @@ public:
 	{
 		mEndClocks = *mCurrentClocks;
 		mClocksElapsed = mEndClocks - mStartClocks + 1;
-		printf("Elapsed %i clocks\n", mClocksElapsed);
+		//printf("Elapsed %i clocks\n", mClocksElapsed);
 	}
 };
 
