@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CpuTests.h"
+#include "CpuTests/CpuTests.h"
 
 struct LdaZpTests : public CpuTests
 {
