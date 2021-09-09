@@ -57,3 +57,15 @@ void Bus::WriteByte(uint16_t address, uint8_t data) const
 	AddressRange range = mDevicesMap.at(device);
 	device->WriteData(address - range.From, data);
 }
+
+void Bus::WriteWord(uint16_t address, uint16_t data) const
+{
+	Device* device = GetDevice(address);
+	if (!device) return;
+
+	AddressRange range = mDevicesMap.at(device);
+	uint8_t lo = data;
+	uint8_t hi = data >> 8;
+	device->WriteData(address - range.From, lo);
+	device->WriteData(address + 1 - range.From, hi);
+}

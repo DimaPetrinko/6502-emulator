@@ -26,4 +26,5 @@ public:
 	uint16_t ReadWord(uint16_t address) const;
 	uint16_t ReadWord(uint16_t address, uint8_t* outLo, uint8_t* outHi) const;
 	void WriteByte(uint16_t address, uint8_t data) const;
+	void WriteWord(uint16_t address, uint16_t data) const;
 };
