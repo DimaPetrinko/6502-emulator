@@ -5,6 +5,7 @@
 #include "Cpu/Instructions/Cpu_lda.h"
 #include "Cpu/Instructions/Cpu_ldx.h"
 #include "Cpu/Instructions/Cpu_ldy.h"
+#include "Cpu/Instructions/Cpu_sta.h"
 #include "Cpu/Instructions/Cpu_adc.h"
 
 Cpu::Cpu(Bus* bus) : mBus(bus)
@@ -29,6 +30,14 @@ Cpu::Cpu(Bus* bus) : mBus(bus)
 	mInstructionFunctions[ldy_zpx] = &Cpu::LdyZpX;
 	mInstructionFunctions[ldy_abs] = &Cpu::LdyAbs;
 	mInstructionFunctions[ldy_absx] = &Cpu::LdyAbsX;
+
+	mInstructionFunctions[sta_zp] = &Cpu::StaZp;
+	mInstructionFunctions[sta_zpx] = &Cpu::StaZpX;
+	mInstructionFunctions[sta_abs] = &Cpu::StaAbs;
+	mInstructionFunctions[sta_absx] = &Cpu::StaAbsX;
+	mInstructionFunctions[sta_absy] = &Cpu::StaAbsY;
+	mInstructionFunctions[sta_indx] = &Cpu::StaIndX;
+	mInstructionFunctions[sta_indy] = &Cpu::StaIndY;
 
 	mInstructionFunctions[adc_im] = &Cpu::AdcIm;
 	mInstructionFunctions[adc_zp] = &Cpu::AdcZp;
@@ -116,4 +125,16 @@ uint16_t Cpu::ReadWord(uint16_t address, uint8_t* outLo, uint8_t* outHi)
 {
 	Cycles += 2;
 	return mBus->ReadWord(address, outLo, outHi);
+}
+
+void Cpu::WriteByte(uint16_t address, uint8_t value)
+{
+	Cycles++;
+	mBus->WriteByte(address, value);
+}
+
+void Cpu::WriteWord(uint16_t address, uint16_t value)
+{
+	Cycles += 2;
+	mBus->WriteWord(address, value);
 }

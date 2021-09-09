@@ -62,9 +62,12 @@ public:
 	void Clock();
 
 private:
+	#include "Cpu/Instructions/Cpu_sta_definition.h"
+
 	#include "Cpu/Instructions/Cpu_lda_definition.h"
 	#include "Cpu/Instructions/Cpu_ldx_definition.h"
 	#include "Cpu/Instructions/Cpu_ldy_definition.h"
+
 	#include "Cpu/Instructions/Cpu_adc_definition.h"
 
 	void Nop();
@@ -77,4 +80,8 @@ private:
 	uint8_t ReadByte(uint16_t address);
 	uint16_t ReadWord(uint16_t address);
 	uint16_t ReadWord(uint16_t address, uint8_t* outLo, uint8_t* outHi);
+
+	void WriteByte(uint16_t address, uint8_t value);
+	void WriteWord(uint16_t address, uint16_t value);
+	void WriteWord(uint16_t address, uint8_t lo, uint8_t hi);
 };
