@@ -10,5 +10,5 @@ int main()
 	
 	RUN_BATCH(ResetTests);
 	RUN_BATCH(LdaTests);
-	RUN_BATCH(StaTests);
+	RUN_BATCH(StaTests);	
 }
