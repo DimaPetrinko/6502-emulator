@@ -2,6 +2,7 @@
 
 Ram::Ram()
 {
+	for (int i = 0; i < MemoryChipSize; i++) mCells[i] = 0;
 }
 
 Ram::~Ram()
