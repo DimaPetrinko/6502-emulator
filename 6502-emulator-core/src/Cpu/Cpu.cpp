@@ -9,10 +9,13 @@
 #include "Cpu/Instructions/Stx/Implementation.h"
 #include "Cpu/Instructions/Sty/Implementation.h"
 #include "Cpu/Instructions/Adc/Implementation.h"
+#include "Cpu/Instructions/Jmp/Implementation.h"
 
 Cpu::Cpu(Bus* bus) : mBus(bus)
 {
 	AddAdcFunctions();
+
+	AddJmpFunctions();
 
 	AddLdaFunctions();
 	AddLdxFunctions();

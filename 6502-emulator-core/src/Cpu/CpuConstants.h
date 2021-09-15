@@ -17,5 +17,6 @@
 #include "Cpu/Instructions/Stx/Codes.h"
 #include "Cpu/Instructions/Sty/Codes.h"
 #include "Cpu/Instructions/Adc/Codes.h"
+#include "Cpu/Instructions/Jmp/Codes.h"
 
 #define nop 0xea

@@ -70,6 +70,7 @@ private:
 	#include "Cpu/Instructions/Ldx/Definitions.h"
 	#include "Cpu/Instructions/Ldy/Definitions.h"
 	#include "Cpu/Instructions/Adc/Definitions.h"
+	#include "Cpu/Instructions/Jmp/Definitions.h"
 
 	void Nop();
 
