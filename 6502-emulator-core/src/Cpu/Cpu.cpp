@@ -6,6 +6,7 @@
 #include "Cpu/Instructions/Cpu_ldx.h"
 #include "Cpu/Instructions/Cpu_ldy.h"
 #include "Cpu/Instructions/Cpu_sta.h"
+#include "Cpu/Instructions/Cpu_stx.h"
 #include "Cpu/Instructions/Cpu_adc.h"
 
 Cpu::Cpu(Bus* bus) : mBus(bus)
@@ -38,6 +39,10 @@ Cpu::Cpu(Bus* bus) : mBus(bus)
 	mInstructionFunctions[sta_absy] = &Cpu::StaAbsY;
 	mInstructionFunctions[sta_indx] = &Cpu::StaIndX;
 	mInstructionFunctions[sta_indy] = &Cpu::StaIndY;
+
+	mInstructionFunctions[stx_zp] = &Cpu::StxZp;
+	mInstructionFunctions[stx_zpy] = &Cpu::StxZpY;
+	mInstructionFunctions[stx_abs] = &Cpu::StxAbs;
 
 	mInstructionFunctions[adc_im] = &Cpu::AdcIm;
 	mInstructionFunctions[adc_zp] = &Cpu::AdcZp;

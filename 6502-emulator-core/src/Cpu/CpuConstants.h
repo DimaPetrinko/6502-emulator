@@ -14,6 +14,7 @@
 #include "Cpu/Instructions/Cpu_ldx_codes.h"
 #include "Cpu/Instructions/Cpu_ldy_codes.h"
 #include "Cpu/Instructions/Cpu_sta_codes.h"
+#include "Cpu/Instructions/Cpu_stx_codes.h"
 #include "Cpu/Instructions/Cpu_adc_codes.h"
 
 #define nop 0xea
