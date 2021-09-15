@@ -2,13 +2,13 @@
 
 #include <iostream>
 #include "Cpu/CpuConstants.h"
-#include "Cpu/Instructions/Lda/Cpu_lda.h"
-#include "Cpu/Instructions/Ldx/Cpu_ldx.h"
-#include "Cpu/Instructions/Ldy/Cpu_ldy.h"
-#include "Cpu/Instructions/Sta/Cpu_sta.h"
-#include "Cpu/Instructions/Stx/Cpu_stx.h"
-#include "Cpu/Instructions/Sty/Cpu_sty.h"
-#include "Cpu/Instructions/Adc/Cpu_adc.h"
+#include "Cpu/Instructions/Lda/Implementation.h"
+#include "Cpu/Instructions/Ldx/Implementation.h"
+#include "Cpu/Instructions/Ldy/Implementation.h"
+#include "Cpu/Instructions/Sta/Implementation.h"
+#include "Cpu/Instructions/Stx/Implementation.h"
+#include "Cpu/Instructions/Sty/Implementation.h"
+#include "Cpu/Instructions/Adc/Implementation.h"
 
 Cpu::Cpu(Bus* bus) : mBus(bus)
 {
