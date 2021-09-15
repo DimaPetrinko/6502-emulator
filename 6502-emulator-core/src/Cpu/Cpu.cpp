@@ -2,61 +2,25 @@
 
 #include <iostream>
 #include "Cpu/CpuConstants.h"
-#include "Cpu/Instructions/Cpu_lda.h"
-#include "Cpu/Instructions/Cpu_ldx.h"
-#include "Cpu/Instructions/Cpu_ldy.h"
-#include "Cpu/Instructions/Cpu_sta.h"
-#include "Cpu/Instructions/Cpu_stx.h"
-#include "Cpu/Instructions/Cpu_sty.h"
-#include "Cpu/Instructions/Cpu_adc.h"
+#include "Cpu/Instructions/Lda/Cpu_lda.h"
+#include "Cpu/Instructions/Ldx/Cpu_ldx.h"
+#include "Cpu/Instructions/Ldy/Cpu_ldy.h"
+#include "Cpu/Instructions/Sta/Cpu_sta.h"
+#include "Cpu/Instructions/Stx/Cpu_stx.h"
+#include "Cpu/Instructions/Sty/Cpu_sty.h"
+#include "Cpu/Instructions/Adc/Cpu_adc.h"
 
 Cpu::Cpu(Bus* bus) : mBus(bus)
 {
-	mInstructionFunctions[lda_im] = &Cpu::LdaIm;
-	mInstructionFunctions[lda_zp] = &Cpu::LdaZp;
-	mInstructionFunctions[lda_zpx] = &Cpu::LdaZpX;
-	mInstructionFunctions[lda_abs] = &Cpu::LdaAbs;
-	mInstructionFunctions[lda_absx] = &Cpu::LdaAbsX;
-	mInstructionFunctions[lda_absy] = &Cpu::LdaAbsY;
-	mInstructionFunctions[lda_indx] = &Cpu::LdaIndX;
-	mInstructionFunctions[lda_indy] = &Cpu::LdaIndY;
+	AddAdcFunctions();
 
-	mInstructionFunctions[ldx_im] = &Cpu::LdxIm;
-	mInstructionFunctions[ldx_zp] = &Cpu::LdxZp;
-	mInstructionFunctions[ldx_zpy] = &Cpu::LdxZpY;
-	mInstructionFunctions[ldx_abs] = &Cpu::LdxAbs;
-	mInstructionFunctions[ldx_absy] = &Cpu::LdxAbsY;
-	
-	mInstructionFunctions[ldy_im] = &Cpu::LdyIm;
-	mInstructionFunctions[ldy_zp] = &Cpu::LdyZp;
-	mInstructionFunctions[ldy_zpx] = &Cpu::LdyZpX;
-	mInstructionFunctions[ldy_abs] = &Cpu::LdyAbs;
-	mInstructionFunctions[ldy_absx] = &Cpu::LdyAbsX;
+	AddLdaFunctions();
+	AddLdxFunctions();
+	AddLdyFunctions();
 
-	mInstructionFunctions[sta_zp] = &Cpu::StaZp;
-	mInstructionFunctions[sta_zpx] = &Cpu::StaZpX;
-	mInstructionFunctions[sta_abs] = &Cpu::StaAbs;
-	mInstructionFunctions[sta_absx] = &Cpu::StaAbsX;
-	mInstructionFunctions[sta_absy] = &Cpu::StaAbsY;
-	mInstructionFunctions[sta_indx] = &Cpu::StaIndX;
-	mInstructionFunctions[sta_indy] = &Cpu::StaIndY;
-
-	mInstructionFunctions[stx_zp] = &Cpu::StxZp;
-	mInstructionFunctions[stx_zpy] = &Cpu::StxZpY;
-	mInstructionFunctions[stx_abs] = &Cpu::StxAbs;
-
-	mInstructionFunctions[sty_zp] = &Cpu::StyZp;
-	mInstructionFunctions[sty_zpx] = &Cpu::StyZpX;
-	mInstructionFunctions[sty_abs] = &Cpu::StyAbs;
-
-	mInstructionFunctions[adc_im] = &Cpu::AdcIm;
-	mInstructionFunctions[adc_zp] = &Cpu::AdcZp;
-	mInstructionFunctions[adc_zpx] = &Cpu::AdcZpX;
-	mInstructionFunctions[adc_abs] = &Cpu::AdcAbs;
-	mInstructionFunctions[adc_absx] = &Cpu::AdcAbsX;
-	mInstructionFunctions[adc_absy] = &Cpu::AdcAbsY;
-	mInstructionFunctions[adc_indx] = &Cpu::AdcIndX;
-	mInstructionFunctions[adc_indy] = &Cpu::AdcIndY;
+	AddStaFunctions();
+	AddStxFunctions();
+	AddStyFunctions();
 	
 	mInstructionFunctions[nop] = &Cpu::Nop;
 }

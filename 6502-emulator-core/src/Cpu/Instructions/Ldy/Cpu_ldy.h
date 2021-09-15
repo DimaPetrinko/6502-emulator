@@ -45,3 +45,12 @@ void Cpu::LdyAbsX()
 	if (AddressPageWillBeCrossed(lo, hi, y)) Cycles++;
 	SetRegister(y, ReadByte(address));
 }
+
+void Cpu::AddLdyFunctions()
+{
+	mInstructionFunctions[ldy_im] = &Cpu::LdyIm;
+	mInstructionFunctions[ldy_zp] = &Cpu::LdyZp;
+	mInstructionFunctions[ldy_zpx] = &Cpu::LdyZpX;
+	mInstructionFunctions[ldy_abs] = &Cpu::LdyAbs;
+	mInstructionFunctions[ldy_absx] = &Cpu::LdyAbsX;
+}

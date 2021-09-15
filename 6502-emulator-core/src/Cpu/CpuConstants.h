@@ -10,12 +10,12 @@
 #define StackStart 0x0100
 #define StackEnd 0x01ff
 
-#include "Cpu/Instructions/Cpu_lda_codes.h"
-#include "Cpu/Instructions/Cpu_ldx_codes.h"
-#include "Cpu/Instructions/Cpu_ldy_codes.h"
-#include "Cpu/Instructions/Cpu_sta_codes.h"
-#include "Cpu/Instructions/Cpu_stx_codes.h"
-#include "Cpu/Instructions/Cpu_sty_codes.h"
-#include "Cpu/Instructions/Cpu_adc_codes.h"
+#include "Cpu/Instructions/Lda/Cpu_lda_codes.h"
+#include "Cpu/Instructions/Ldx/Cpu_ldx_codes.h"
+#include "Cpu/Instructions/Ldy/Cpu_ldy_codes.h"
+#include "Cpu/Instructions/Sta/Cpu_sta_codes.h"
+#include "Cpu/Instructions/Stx/Cpu_stx_codes.h"
+#include "Cpu/Instructions/Sty/Cpu_sty_codes.h"
+#include "Cpu/Instructions/Adc/Cpu_adc_codes.h"
 
 #define nop 0xea

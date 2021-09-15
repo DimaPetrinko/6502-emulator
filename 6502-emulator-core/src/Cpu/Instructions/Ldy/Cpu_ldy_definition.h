@@ -3,3 +3,5 @@ void LdyZp();
 void LdyZpX();
 void LdyAbs();
 void LdyAbsX();
+
+void AddLdyFunctions();

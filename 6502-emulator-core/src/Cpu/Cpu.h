@@ -63,15 +63,15 @@ public:
 	void Clock();
 
 private:
-	#include "Cpu/Instructions/Cpu_sta_definition.h"
-	#include "Cpu/Instructions/Cpu_stx_definition.h"
-	#include "Cpu/Instructions/Cpu_sty_definition.h"
+	#include "Cpu/Instructions/Sta/Cpu_sta_definition.h"
+	#include "Cpu/Instructions/Stx/Cpu_stx_definition.h"
+	#include "Cpu/Instructions/Sty/Cpu_sty_definition.h"
 
-	#include "Cpu/Instructions/Cpu_lda_definition.h"
-	#include "Cpu/Instructions/Cpu_ldx_definition.h"
-	#include "Cpu/Instructions/Cpu_ldy_definition.h"
+	#include "Cpu/Instructions/Lda/Cpu_lda_definition.h"
+	#include "Cpu/Instructions/Ldx/Cpu_ldx_definition.h"
+	#include "Cpu/Instructions/Ldy/Cpu_ldy_definition.h"
 
-	#include "Cpu/Instructions/Cpu_adc_definition.h"
+	#include "Cpu/Instructions/Adc/Cpu_adc_definition.h"
 
 	void Nop();
 

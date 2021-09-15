@@ -87,3 +87,15 @@ uint8_t Cpu::AddWithCarry(uint16_t address)
 	SetAWithArithmeticFlags(value, result);
 	return value;
 }
+
+void Cpu::AddAdcFunctions()
+{
+	mInstructionFunctions[adc_im] = &Cpu::AdcIm;
+	mInstructionFunctions[adc_zp] = &Cpu::AdcZp;
+	mInstructionFunctions[adc_zpx] = &Cpu::AdcZpX;
+	mInstructionFunctions[adc_abs] = &Cpu::AdcAbs;
+	mInstructionFunctions[adc_absx] = &Cpu::AdcAbsX;
+	mInstructionFunctions[adc_absy] = &Cpu::AdcAbsY;
+	mInstructionFunctions[adc_indx] = &Cpu::AdcIndX;
+	mInstructionFunctions[adc_indy] = &Cpu::AdcIndY;
+}

@@ -80,3 +80,15 @@ void Cpu::LdaIndY()
 	if (AddressPageWillBeCrossed(lo, hi, y)) Cycles++;
 	SetRegister(a, ReadByte(realAddress));
 }
+
+void Cpu::AddLdaFunctions()
+{
+	mInstructionFunctions[lda_im] = &Cpu::LdaIm;
+	mInstructionFunctions[lda_zp] = &Cpu::LdaZp;
+	mInstructionFunctions[lda_zpx] = &Cpu::LdaZpX;
+	mInstructionFunctions[lda_abs] = &Cpu::LdaAbs;
+	mInstructionFunctions[lda_absx] = &Cpu::LdaAbsX;
+	mInstructionFunctions[lda_absy] = &Cpu::LdaAbsY;
+	mInstructionFunctions[lda_indx] = &Cpu::LdaIndX;
+	mInstructionFunctions[lda_indy] = &Cpu::LdaIndY;
+}

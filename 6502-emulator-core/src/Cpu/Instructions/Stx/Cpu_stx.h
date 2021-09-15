@@ -1,28 +1,35 @@
 #include "Cpu/Cpu.h"
 
-void Cpu::StyZp()
+void Cpu::StxZp()
 {
 	auto c = ClocksCounter(&Cycles);
 	uint8_t zeroPageAddress = ReadByte(pc++);
 	Value = zeroPageAddress;
-	WriteByte(zeroPageAddress, y);
+	WriteByte(zeroPageAddress, x);
 }
 
-void Cpu::StyZpX()
+void Cpu::StxZpY()
 {
 	auto c = ClocksCounter(&Cycles);
 	uint8_t zeroPageAddress = ReadByte(pc++);
 	Value = zeroPageAddress;
-	zeroPageAddress += x;
+	zeroPageAddress += y;
 	Cycles++;
-	WriteByte(zeroPageAddress, y);
+	WriteByte(zeroPageAddress, x);
 }
 
-void Cpu::StyAbs()
+void Cpu::StxAbs()
 {
 	auto c = ClocksCounter(&Cycles);
 	uint16_t address = ReadWord(pc);
 	pc += 2;
 	Value = address;
-	WriteByte(address, y);
+	WriteByte(address, x);
+}
+
+void Cpu::AddStxFunctions()
+{
+	mInstructionFunctions[stx_zp] = &Cpu::StxZp;
+	mInstructionFunctions[stx_zpy] = &Cpu::StxZpY;
+	mInstructionFunctions[stx_abs] = &Cpu::StxAbs;
 }

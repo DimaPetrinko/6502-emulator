@@ -6,3 +6,5 @@ void LdaAbsX();
 void LdaAbsY();
 void LdaIndX();
 void LdaIndY();
+
+void AddLdaFunctions();

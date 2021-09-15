@@ -70,3 +70,14 @@ void Cpu::StaIndY()
 	Cycles++;
 	WriteByte(realAddress, a);
 }
+
+void Cpu::AddStaFunctions()
+{
+	mInstructionFunctions[sta_zp] = &Cpu::StaZp;
+	mInstructionFunctions[sta_zpx] = &Cpu::StaZpX;
+	mInstructionFunctions[sta_abs] = &Cpu::StaAbs;
+	mInstructionFunctions[sta_absx] = &Cpu::StaAbsX;
+	mInstructionFunctions[sta_absy] = &Cpu::StaAbsY;
+	mInstructionFunctions[sta_indx] = &Cpu::StaIndX;
+	mInstructionFunctions[sta_indy] = &Cpu::StaIndY;	
+}

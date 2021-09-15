@@ -5,3 +5,5 @@ void StaAbsX();
 void StaAbsY();
 void StaIndX();
 void StaIndY();
+
+void AddStaFunctions();
