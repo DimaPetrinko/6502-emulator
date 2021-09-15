@@ -65,6 +65,7 @@ public:
 private:
 	#include "Cpu/Instructions/Cpu_sta_definition.h"
 	#include "Cpu/Instructions/Cpu_stx_definition.h"
+	#include "Cpu/Instructions/Cpu_sty_definition.h"
 
 	#include "Cpu/Instructions/Cpu_lda_definition.h"
 	#include "Cpu/Instructions/Cpu_ldx_definition.h"
